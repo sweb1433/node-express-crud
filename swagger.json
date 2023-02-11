@@ -1,0 +1,158 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "My User Project CRUD",
+      "description": "My User Project Application API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    
+        "paths": {
+          "/products": {
+            "get": {
+              "tags": ["Products"],
+              "summary": "Get all Products in json data file",
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/Products"
+                  }
+                }
+              }
+            }
+          },
+          "/product/addProduct": {
+            "post": {
+              "tags": ["Products"],
+              "description": "Add new product in system",
+              "parameters": [
+                {
+                  "name": "Product",
+                  "in": "body",
+                  "description": "Product that we want to add",
+                  "schema": {
+                    "$ref": "#/definitions/Products"
+                  }
+                }
+              ],
+              "produces": ["application/json"],
+              "responses": {
+                "200": {
+                  "description": "New Product is added",
+                  "schema": {
+                    "$ref": "#/definitions/AddProduct"
+                  }
+                }
+              }
+            }
+          },
+          "/product/{id}": {
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID of product that we want to find",
+                "type": "integer"
+              }
+            ],
+            "put": {
+              "summary": "Update product with give ID",
+              "tags": ["Products"],
+              "parameters": [
+                {
+                  "name": "product",
+                  "in": "body",
+                  "description": "Product with new values of properties",
+                  "schema": {
+                    "$ref": "#/definitions/Products"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "User is updated",
+                  "schema": {
+                    "$ref": "#/definitions/UpdateProduct"
+                  }
+                }
+              }
+            }
+          },
+          "/product/delete/{id}": {
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID of product that we want to find",
+                "type": "integer"
+              }
+            ],
+            "delete": {
+              "summary": "delete product with give ID",
+              "tags": ["Products"],
+              "parameters": [
+              ],
+              "responses": {
+                "200": {
+                  "description": "product is deleted",
+                  "schema": {
+                    "$ref": "#/definitions/UpdateProduct"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "definitions": {
+          "Products": {
+            "properties": {
+              "productName": {
+                "type": "string"
+              },
+              "size": {
+                "type": "string"
+              },
+              "price": {
+                "type": "string"
+                
+              },
+              "stock": {
+                "type": "integer"
+              }
+            }
+          },
+          "AddProduct":{
+            "properties":{
+              "Success" :{
+                "type" : "boolean"
+              },
+              "msg" :{
+                "type" : "string"
+              }
+
+            }
+          },
+          "UpdateProduct":{
+            "properties":{
+              "message" :{
+                "type" : "string"
+              }
+
+            }
+          }
+        }
+        
+  }
+
+  
